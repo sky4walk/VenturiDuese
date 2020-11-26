@@ -5,12 +5,13 @@ printBoden              = false;
 //printBoden              = true;
 WandDicke               = 5;
 LuefterLaenge           = 120;
-LuefterTiefe            = 20;
+LuefterTiefe            = 39;
 RohrDN75DInnen          = 70;
 RohrDN75DAussen         = 75;
 DueseDurchmesser        = 35;
-DueseLaenge             = 35;
-RohrDN75TStueckLange    = 300;
+DueseLaenge             = 30;
+EndeLaenge              = 30;
+RohrDN75TStueckLange    = 50;
 BohrlochM3              = 3;
 AbstandLuefterRohr      = 50;
 
@@ -128,6 +129,7 @@ module VenturiAdapter(
     RohrDN75DInnen,
     BohrlochM3,
     RohrDN75TStueckLange,
+    EndeLaenge,
     AbstandLuefterRohr,
     DueseDurchmesser,
     DueseLaenge)
@@ -140,9 +142,11 @@ module VenturiAdapter(
             translate([0,0,-LuefterTiefe+WandDicke])
                 LuefterHalterung(WandDicke,LuefterLaenge,LuefterTiefe,BohrlochM3);    
             translate([LuefterLaenge/2+WandDicke,LuefterLaenge/2+WandDicke,AbstandLuefterRohr+WandDicke])
-                InnenRohr(WandDicke,RohrDN75DInnen,RohrDN75TStueckLange/2);
-            translate([LuefterLaenge/2+WandDicke,LuefterLaenge/2+WandDicke,AbstandLuefterRohr+WandDicke+RohrDN75TStueckLange/2])
+                InnenRohr(WandDicke,RohrDN75DInnen,RohrDN75TStueckLange);
+            translate([LuefterLaenge/2+WandDicke,LuefterLaenge/2+WandDicke,AbstandLuefterRohr+WandDicke+RohrDN75TStueckLange])
                 Duese(WandDicke,RohrDN75DInnen,DueseDurchmesser,DueseLaenge);
+            translate([LuefterLaenge/2+WandDicke,LuefterLaenge/2+WandDicke,AbstandLuefterRohr+WandDicke+RohrDN75TStueckLange+DueseLaenge])
+                InnenRohr(WandDicke,DueseDurchmesser,EndeLaenge);
             translate([-WandDicke,-WandDicke,-LuefterTiefe+WandDicke])
                 cube([WandDicke*2,WandDicke*2,LuefterTiefe+WandDicke]);
             translate([+WandDicke+LuefterLaenge,-WandDicke,-LuefterTiefe+WandDicke])
@@ -207,6 +211,6 @@ if ( printBoden ) {
     translate([0,0,-LuefterTiefe])
         Deckel(WandDicke,LuefterLaenge,BohrlochM3);
 } else {
-    VenturiAdapter(WandDicke,LuefterLaenge,LuefterTiefe,AbstandLuefterRohr,RohrDN75DInnen,BohrlochM3,RohrDN75TStueckLange,       AbstandLuefterRohr,DueseDurchmesser,DueseLaenge);
+    VenturiAdapter(WandDicke,LuefterLaenge,LuefterTiefe,AbstandLuefterRohr,RohrDN75DInnen,BohrlochM3,RohrDN75TStueckLange,EndeLaenge,AbstandLuefterRohr,DueseDurchmesser,DueseLaenge);
 }
 
