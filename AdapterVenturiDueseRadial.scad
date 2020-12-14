@@ -9,7 +9,7 @@ EndeLaenge              = 30;
 RohrDN75TStueckLange    = 50;
 AnschlussDAussen        = 35;
 RadialLang              = 30;
-RadialBreit             = 10;
+RadialBreit             = 20;
 
 $fn=100;
 
