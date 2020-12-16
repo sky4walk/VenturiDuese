@@ -4,12 +4,12 @@
 RohrDN75DInnen          = 70;
 RohrDN75DAussen         = 75;
 DueseDurchmesser        = 35;
-DueseLaenge             = 30;
 EndeLaenge              = 30;
-RohrDN75TStueckLange    = 50;
-AnschlussDAussen        = 35;
-RadialLang              = 30;
-RadialBreit             = 20;
+RohrDN75TStueckLange    = 160;
+RohrDN50TStueckAussen   = 50;
+RadialLang              = 57;
+RadialBreit             = 30;
+RadialTiefe             = 10;
 
 $fn=100;
 
@@ -51,38 +51,39 @@ difference()
         {
             union()
             {
-                cylinder(r=RohrDN75DAussen/2,RohrDN75TStueckLange+DueseLaenge+EndeLaenge*2);
-                translate([0,0,RohrDN75TStueckLange+DueseLaenge])
+                cylinder(r=RohrDN75DAussen/2,RohrDN75TStueckLange);
+                translate([0,0,RohrDN75TStueckLange/2])
                     rotate([0,90,0])
-                        cylinder(r=AnschlussDAussen/2,RohrDN75DAussen/2);
+                        cylinder(r=RohrDN50TStueckAussen/2,RohrDN75DAussen/2);
             }
+
             translate([0,0,-1])
-                cylinder(r=RohrDN75DInnen/2,RohrDN75TStueckLange+DueseLaenge+EndeLaenge*2+2);
-            translate([0,0,RohrDN75TStueckLange+DueseLaenge])
+                cylinder(r=RohrDN75DInnen/2,RohrDN75TStueckLange+2);
+            translate([0,0,RohrDN75TStueckLange/2])
                     rotate([0,90,0])
-                        cylinder(r=AnschlussDAussen/2-WandDicke,RohrDN75DAussen/2+2);
+                        cylinder(r=RohrDN50TStueckAussen/2-WandDicke,RohrDN75DAussen/2+2);
+            
         }
-        translate([0,0,WandDicke+RohrDN75TStueckLange])
-                    Duese(WandDicke,RohrDN75DAussen,DueseDurchmesser,DueseLaenge);
-        translate([0,0,WandDicke+RohrDN75TStueckLange+DueseLaenge])
-                    InnenRohr(WandDicke,DueseDurchmesser,EndeLaenge);
-        translate([0,0,-WandDicke*2])
+        translate([0,0,RohrDN75TStueckLange/2-RohrDN50TStueckAussen/2])
+                    Duese(WandDicke,RohrDN75DAussen,DueseDurchmesser,RohrDN50TStueckAussen/2);
+        translate([0,0,RohrDN75TStueckLange/2])
+                    InnenRohr(WandDicke,DueseDurchmesser,RohrDN50TStueckAussen/2);
+        translate([0,0,-RadialTiefe])
         {
             difference()
             {
-                cylinder(r1=RohrDN75DAussen/2,r2=RohrDN75DAussen/2,WandDicke*2);
+                cylinder(r1=RohrDN75DAussen/2,r2=RohrDN75DAussen/2,RadialTiefe);
                 translate([-RadialLang/2,-RadialBreit/2,-1])
-                    cube([RadialLang,RadialBreit,WandDicke*2+2],center = false);
+                    cube([RadialLang,RadialBreit,RadialTiefe+2],center = false);
             }    
         }
         // online for viewing
-        translate([RohrDN75DAussen/2,0,RohrDN75TStueckLange+DueseLaenge])
+        translate([RohrDN75DAussen/2,0,RohrDN75TStueckLange/2])
             rotate([0,90,0])
-                InnenRohr(WandDicke,DueseDurchmesser,EndeLaenge);
-        
+                InnenRohr(WandDicke,RohrDN50TStueckAussen,EndeLaenge);
     }
 
     translate([-50,-0,0])
-        cube([100,100,200],center = false);
+        cube([200,100,200],center = false);
 }
 
