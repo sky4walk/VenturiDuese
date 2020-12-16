@@ -4,7 +4,7 @@
 RohrDN75DInnen          = 70;
 RohrDN75DAussen         = 75;
 DueseDurchmesser        = 35;
-EndeLaenge              = 30;
+EndeLaenge              = 15;
 RohrDN75TStueckLange    = 160;
 RohrDN50TStueckAussen   = 50;
 RadialLang              = 57;
@@ -54,7 +54,7 @@ difference()
                 cylinder(r=RohrDN75DAussen/2,RohrDN75TStueckLange);
                 translate([0,0,RohrDN75TStueckLange/2])
                     rotate([0,90,0])
-                        cylinder(r=RohrDN50TStueckAussen/2,RohrDN75DAussen/2);
+                        cylinder(r=RohrDN50TStueckAussen/2+WandDicke,RohrDN75DAussen/2);
             }
 
             translate([0,0,-1])
@@ -77,13 +77,13 @@ difference()
                     cube([RadialLang,RadialBreit,RadialTiefe+2],center = false);
             }    
         }
-        // online for viewing
+        // online for viewing        
         translate([RohrDN75DAussen/2,0,RohrDN75TStueckLange/2])
             rotate([0,90,0])
-                InnenRohr(WandDicke,RohrDN50TStueckAussen,EndeLaenge);
+                InnenRohr(WandDicke,RohrDN50TStueckAussen+WandDicke*2,EndeLaenge);
+        
     }
 
-    translate([-50,-0,0])
-        cube([200,100,200],center = false);
+    translate([-50,-0,0]) cube([200,100,200],center = false);
 }
 
