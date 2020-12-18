@@ -1,34 +1,51 @@
 // Andre Betz
 // github@AndreBetz.de
 
-WandDicke               = 5;
-KN50Innen               = 51;
-KN50Laenge              = 42;
+RohrKN50Aussen          = 50;
+RohrKN50Innen           = 45;
+RohrKN50Laenge          = 20;
 Uebergang50Laenge       = 20;
-LampenschirmOeffnung    = 65;
-LampenschirmHalterung   = 75;
+LampenschirmOeffnung    = 42;
+LampenschirmHalterung   = 10;
 
 $fn=100;
 
-module Zylinder (
-    RadiusInnen1,
-    RadiusInnen2,
+WandDicke = (RohrKN50Aussen - RohrKN50Innen)/2;
+
+module InnenRohr(
     WandDicke,
-    Hoehe
+    RohrDN75DInnen,
+    RohrDN75TStueckLange)
+{
+    difference()
+    {
+        cylinder(r=RohrDN75DInnen/2,RohrDN75TStueckLange);
+        translate([0,0,-1])
+            cylinder(r=RohrDN75DInnen/2-WandDicke,RohrDN75TStueckLange+2);
+    }
+}
+
+module Duese(
+    WandDicke,
+    RohrDN75DInnen,
+    DueseDurchmesser,
+    DueseLaenge
 )
 {
     difference()
     {
-       cylinder(r1=RadiusInnen1/2,r2=RadiusInnen2/2,Hoehe);
-       translate([0,0,-1]) 
-        cylinder(r1=RadiusInnen1/2-WandDicke,r2=RadiusInnen2/2-WandDicke,Hoehe+2); 
+        cylinder(r1=RohrDN75DInnen/2,r2=DueseDurchmesser/2,DueseLaenge);
+        translate([0,0,-1])
+            cylinder(r1=RohrDN75DInnen/2-WandDicke,r2=DueseDurchmesser/2-WandDicke,DueseLaenge+2);
     }
 }
 
-Zylinder(KN50Innen,KN50Innen,WandDicke,KN50Laenge);
-translate([0,0,-Uebergang50Laenge])
-  Zylinder(LampenschirmOeffnung,KN50Innen,WandDicke,Uebergang50Laenge);
-translate([0,0,-Uebergang50Laenge-10])
-  Zylinder(LampenschirmOeffnung,LampenschirmOeffnung,WandDicke,10);
-translate([0,0,-Uebergang50Laenge-10-10])
-  Zylinder(LampenschirmHalterung,LampenschirmHalterung,LampenschirmHalterung-LampenschirmOeffnung,10);
+InnenRohr(WandDicke,RohrKN50Aussen+WandDicke*2,RohrKN50Laenge);
+translate([0,0,RohrKN50Laenge])
+    Duese(WandDicke,RohrKN50Aussen+WandDicke*2,LampenschirmOeffnung,Uebergang50Laenge);
+translate([0,0,RohrKN50Laenge+Uebergang50Laenge])
+    InnenRohr(WandDicke,LampenschirmOeffnung,LampenschirmHalterung);
+translate([LampenschirmOeffnung*1.5,0,0])
+//translate([0,0,RohrKN50Laenge+Uebergang50Laenge])
+    InnenRohr(WandDicke,LampenschirmOeffnung+WandDicke*2,LampenschirmHalterung/2);
+
