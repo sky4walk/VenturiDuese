@@ -8,7 +8,7 @@ EndeLaenge              = 15;
 RohrDN75TStueckLange    = 160;
 RohrDN50TStueckAussen   = 50;
 RadialLang              = 57;
-RadialBreit             = 30;
+RadialBreit             = 32;
 RadialTiefe             = 10;
 SupportBreite           = 5;
 

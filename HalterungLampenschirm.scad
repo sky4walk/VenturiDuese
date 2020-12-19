@@ -40,12 +40,12 @@ module Duese(
     }
 }
 
-InnenRohr(WandDicke,RohrKN50Aussen+WandDicke*2,RohrKN50Laenge);
+InnenRohr(WandDicke,RohrKN50Aussen,RohrKN50Laenge);
 translate([0,0,RohrKN50Laenge])
-    Duese(WandDicke,RohrKN50Aussen+WandDicke*2,LampenschirmOeffnung,Uebergang50Laenge);
+    Duese(WandDicke,RohrKN50Aussen,LampenschirmOeffnung,Uebergang50Laenge);
 translate([0,0,RohrKN50Laenge+Uebergang50Laenge])
     InnenRohr(WandDicke,LampenschirmOeffnung,LampenschirmHalterung);
 translate([LampenschirmOeffnung*1.5,0,0])
 //translate([0,0,RohrKN50Laenge+Uebergang50Laenge])
-    InnenRohr(WandDicke,LampenschirmOeffnung+WandDicke*2,LampenschirmHalterung/2);
+    InnenRohr(WandDicke,LampenschirmOeffnung+WandDicke*2+0.5,LampenschirmHalterung/2);
 
