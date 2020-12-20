@@ -154,11 +154,12 @@ difference()
                     cube([RadialLang,RadialBreit,RadialTiefe+2],center = false);
             }    
         }
+        
         translate([RohrDN75DAussen/2,0,RohrDN75TStueckLange/2])
             rotate([0,90,0])
-                InnenRohr(WandDicke,RohrDN50TStueckAussen+WandDicke*2,EndeLaenge);
+                InnenRohr(WandDicke-0.5,RohrDN50TStueckAussen+WandDicke*2,EndeLaenge);
             
-        translate([RohrDN75DAussen/2,SupportBreite/2,RohrDN75TStueckLange/2-RohrDN50TStueckAussen/2])
+        translate([RohrDN75DAussen/2,SupportBreite/2,RohrDN75TStueckLange/2-RohrDN50TStueckAussen/2-0.5])
             rotate([90,90,0])
                 wedge(90, EndeLaenge+WandDicke, EndeLaenge+WandDicke, SupportBreite);
     }
