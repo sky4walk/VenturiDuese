@@ -3,7 +3,7 @@
 
 RohrKN50Aussen          = 50;
 RohrKN50Innen           = 45;
-RohrKN50Laenge          = 60;
+RohrKN50Laenge          = 50;
 HalterungsRingD         = 15;
 HalterungsRingH         =  5;
 
@@ -24,6 +24,6 @@ module InnenRohr(
     }
 }
 
-InnenRohr(WandDicke,RohrKN50Aussen,RohrKN50Laenge);
+InnenRohr(WandDicke,RohrKN50Aussen,RohrKN50Laenge+HalterungsRingH);
 InnenRohr(HalterungsRingD,RohrKN50Aussen+HalterungsRingD*2,HalterungsRingH);
 
