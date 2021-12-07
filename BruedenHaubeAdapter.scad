@@ -12,6 +12,10 @@ auflageRand = 20;
 schraubeBohrlochM5 = 5;
 //tauchhuelse
 sensorBohrloch = 22;
+// Haken
+hakenAbstand = 20;
+hakenBreite  = 20;
+hakenHalter  = 70;
 
 $fn=100;
 
@@ -34,12 +38,16 @@ module HaubeAdapter() {
         // Tauchhuelse
         randKomplett = topfDurchmesser - haubeDurchmesser;
         echo(randKomplett);
-        translate([0,haubeDurchmesser/2+randKomplett/4,-1]) 
+        translate([haubeDurchmesser/2+randKomplett/4,0,-1]) 
             cylinder(platteDicke+2,sensorBohrloch/2,sensorBohrloch/2,false);
     }
+    translate([innenDurchmesser/2-hakenAbstand,-hakenBreite/2,0]) 
+        cube([hakenAbstand,hakenBreite,platteDicke],center = false);
+    translate([innenDurchmesser/2-hakenAbstand-hakenBreite,-hakenHalter/2,0]) 
+        cube([hakenBreite,hakenHalter,platteDicke],center = false);
 }
 
-//projection() 
+projection() 
 { 
     HaubeAdapter();
 }
