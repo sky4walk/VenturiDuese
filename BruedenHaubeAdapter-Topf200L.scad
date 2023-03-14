@@ -16,8 +16,6 @@ sensorBohrloch = 22;
 hakenAbstand = 20;
 hakenBreite  = 20;
 hakenHalter  = 260;
-// Tauchsieder 8/6 Zoll Durchlass
-tauchsiederBohrung = 48;
 
 $fn=100;
 
@@ -47,12 +45,9 @@ module HaubeAdapter() {
 //        cube([hakenAbstand,hakenBreite,platteDicke],center = false);
     translate([innenDurchmesser/2-hakenAbstand-hakenBreite,-hakenHalter/2,0]) 
         cube([hakenBreite,hakenHalter,platteDicke],center = false);
-    
-    translate([innenDurchmesser/2-hakenAbstand-hakenBreite,-hakenHalter/2,0]) 
-        cylinder(platteDicke+2,tauchsiederBohrung/2,tauchsiederBohrung/2,false);
 }
 
-//projection() 
+projection() 
 { 
     HaubeAdapter();
 }
